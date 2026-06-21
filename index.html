@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paul Bridges — AI Business Coach</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#0A0A0B;
+--bg-soft:#121214;
+--gold:#E8B547;
+--gold-soft:#F0C060;
+--text:#F5F5F7;
+--muted:#A1A1AA;
+--border:rgba(255,255,255,0.08);
+--card:#141416;
+--radius:14px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+font-family:'Inter',sans-serif;
+background:radial-gradient(circle at 20% 10%,rgba(232,181,71,0.08),transparent 40%), var(--bg);
+color:var(--text);
+line-height:1.6;
+}
+
+img{max-width:100%;display:block;border-radius:12px}
+
+.container{width:90%;max-width:1200px;margin:auto}
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+z-index:1000;
+padding:18px 0;
+transition:0.3s;
+}
+nav.scrolled{
+background:rgba(10,10,11,0.85);
+backdrop-filter:blur(10px);
+border-bottom:1px solid var(--border);
+}
+
+.nav-inner{
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.logo{
+font-weight:700;
+letter-spacing:2px;
+font-size:14px;
+}
+.logo span{color:var(--gold)}
+
+.nav-links{
+display:flex;
+gap:28px;
+align-items:center;
+}
+.nav-links a{
+color:var(--muted);
+text-decoration:none;
+font-size:14px;
+transition:0.3s;
+}
+.nav-links a:hover{color:var(--text)}
+
+.btn{
+padding:12px 20px;
+border-radius:999px;
+font-size:14px;
+font-weight:500;
+text-decoration:none;
+transition:0.3s;
+display:inline-block;
+}
+.btn-gold{
+background:linear-gradient(135deg,var(--gold),var(--gold-soft));
+color:#111;
+box-shadow:0 8px 30px rgba(232,181,71,0.25);
+}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(232,181,71,0.35)}
+
+.btn-outline{
+border:1px solid var(--border);
+color:var(--text);
+}
+.btn-outline:hover{
+border-color:var(--gold);
+color:var(--gold);
+}
+
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+position:relative;
+overflow:hidden;
+}
+.hero-grid{
+display:grid;
+grid-template-columns:1fr;
+gap:40px;
+align-items:center;
+}
+
+.hero h1{
+font-size:clamp(40px,6vw,72px);
+line-height:1.1;
+letter-spacing:-1px;
+margin-bottom:20px;
+}
+.hero p{
+color:var(--muted);
+max-width:520px;
+margin-bottom:30px;
+}
+
+.hero-actions{
+display:flex;
+gap:16px;
+flex-wrap:wrap;
+margin-bottom:20px;
+}
+
+.social-proof{
+font-size:13px;
+color:var(--muted);
+}
+
+.hero-img{
+position:relative;
+}
+.hero-img::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(90deg,rgba(10,10,11,0.9),transparent);
+border-radius:12px;
+}
+
+.section{
+padding:100px 0;
+}
+
+.label{
+color:var(--gold);
+font-size:12px;
+letter-spacing:2px;
+margin-bottom:10px;
+}
+
+h2{
+font-size:clamp(28px,4vw,42px);
+margin-bottom:20px;
+letter-spacing:-0.5px;
+}
+
+.about-grid{
+display:grid;
+gap:50px;
+grid-template-columns:1fr;
+align-items:center;
+}
+
+.stats{
+display:flex;
+gap:30px;
+margin-top:30px;
+flex-wrap:wrap;
+}
+.stat{
+font-size:14px;
+color:var(--muted);
+}
+.stat strong{
+display:block;
+font-size:24px;
+color:var(--gold);
+}
+
+.cards{
+display:grid;
+gap:24px;
+grid-template-columns:1fr;
+margin-top:40px;
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--border);
+padding:28px;
+border-radius:var(--radius);
+transition:0.3s;
+position:relative;
+}
+.card:hover{
+transform:translateY(-6px);
+border-color:var(--gold);
+box-shadow:0 10px 40px rgba(0,0,0,0.5);
+}
+
+.card h3{margin-bottom:10px}
+.card p{color:var(--muted);font-size:14px}
+.card a{
+color:var(--gold);
+text-decoration:none;
+font-size:14px;
+display:inline-block;
+margin-top:15px;
+}
+
+.testimonials{
+display:grid;
+gap:24px;
+grid-template-columns:1fr;
+margin-top:40px;
+}
+
+.testimonial{
+background:var(--card);
+border:1px solid var(--border);
+padding:24px;
+border-radius:var(--radius);
+}
+.testimonial p{margin-bottom:15px}
+.stars{color:var(--gold);margin-bottom:10px}
+
+.newsletter{
+background:radial-gradient(circle at 50% 0%,rgba(232,181,71,0.15),transparent 60%), var(--bg-soft);
+border:1px solid var(--border);
+padding:50px;
+border-radius:var(--radius);
+text-align:center;
+}
+
+.newsletter input{
+padding:14px;
+border-radius:999px;
+border:1px solid var(--border);
+background:#0d0d0e;
+color:#fff;
+width:100%;
+max-width:320px;
+margin-right:10px;
+}
+
+footer{
+padding:60px 0;
+border-top:1px solid var(--border);
+color:var(--muted);
+}
+
+.footer-inner{
+display:flex;
+flex-direction:column;
+gap:20px;
+align-items:center;
+text-align:center;
+}
+
+@media(min-width:768px){
+.hero-grid{grid-template-columns:1.1fr 1fr}
+.about-grid{grid-template-columns:1fr 1fr}
+.cards{grid-template-columns:repeat(3,1fr)}
+.testimonials{grid-template-columns:repeat(3,1fr)}
+.footer-inner{flex-direction:row;justify-content:space-between;text-align:left}
+}
+</style>
+</head>
+
+<body>
+
+<nav id="nav">
+<div class="container nav-inner">
+<div class="logo">PAUL BRIDGES<span>.</span></div>
+<div class="nav-links">
+<a href="#about">About</a>
+<a href="#services">Services</a>
+<a href="#testimonials">Testimonials</a>
+<a href="#newsletter">Newsletter</a>
+<a href="#" class="btn btn-gold">Book a Call</a>
+</div>
+</div>
+</nav>
+
+<section class="hero container" data-hero>
+<div class="hero-grid">
+<div>
+<h1>Turn AI Into Your Unfair Business Advantage.</h1>
+<p>I help founders, executives, and teams harness artificial intelligence to scale faster, work smarter, and stay ahead of the curve.</p>
+<div class="hero-actions">
+<a href="#" class="btn btn-gold">Work With Paul</a>
+<a href="#" class="btn btn-outline">Watch the Intro</a>
+</div>
+<div class="social-proof">Trusted by 500+ business leaders worldwide</div>
+</div>
+<div class="hero-img">
+<img src="/assets/ref-0.png" alt="Paul Bridges">
+</div>
+</div>
+</section>
+
+<section class="section container" id="about" data-reveal>
+<div class="about-grid">
+<div>
+<div class="label">ABOUT PAUL</div>
+<h2>A decade of business strategy, now powered by AI.</h2>
+<p>Paul Bridges is a business strategist and operator who has spent over a decade helping companies grow, scale, and outperform their competition. From startups to established enterprises, his work has always centered on one thing: practical results.</p>
+<p>As artificial intelligence reshaped the business landscape, Paul moved early — integrating AI into real-world operations, not theory. Today, he helps leaders adopt AI in ways that drive measurable outcomes, not hype.</p>
+<p>His philosophy is simple: AI is a force multiplier for human talent. The businesses that learn to leverage it effectively will define the next decade.</p>
+
+<div class="stats">
+<div class="stat"><strong data-count="10">10+</strong> yrs experience</div>
+<div class="stat"><strong data-count="500">500+</strong> leaders coached</div>
+<div class="stat"><strong data-count="50">50+</strong> AI implementations</div>
+</div>
+</div>
+
+<div>
+<img src="/assets/ref-1.png" alt="Paul Bridges portrait">
+</div>
+</div>
+</section>
+
+<section class="section container" id="services" data-reveal>
+<div class="label">WHAT I OFFER</div>
+<h2>Three ways to work with me.</h2>
+
+<div class="cards">
+<div class="card">
+<h3>1:1 AI Strategy Coaching</h3>
+<p>Personalized coaching designed to integrate AI directly into your business. Get a tailored roadmap, weekly sessions, and direct access to strategic guidance.</p>
+<a href="#">Learn more →</a>
+</div>
+
+<div class="card">
+<h3>Team AI Workshops</h3>
+<p>Hands-on sessions that equip your entire team with practical AI tools, workflows, and frameworks they can apply immediately.</p>
+<a href="#">Learn more →</a>
+</div>
+
+<div class="card">
+<h3>AI Implementation Consulting</h3>
+<p>End-to-end support identifying opportunities, deploying solutions, and scaling AI across your organization for measurable ROI.</p>
+<a href="#">Learn more →</a>
+</div>
+</div>
+</section>
+
+<section class="section container" id="testimonials" data-reveal>
+<div class="label">CLIENT STORIES</div>
+<h2>Results that speak for themselves.</h2>
+
+<div class="testimonials">
+<div class="testimonial">
+<div class="stars">★★★★★</div>
+<p>"Paul didn't just teach us AI tools — he rewired how our team thinks about problem-solving. We cut our reporting time by 70%."</p>
+<strong>Sarah Chen</strong><br><span class="muted">COO, Nexus Growth</span>
+</div>
+
+<div class="testimonial">
+<div class="stars">★★★★★</div>
+<p>"Working with Paul felt like downloading a decade of AI strategy in eight weeks. The ROI was immediate."</p>
+<strong>Marcus Webb</strong><br><span class="muted">Founder, Lumen Labs</span>
+</div>
+
+<div class="testimonial">
+<div class="stars">★★★★★</div>
+<p>"The best investment we made this year. Paul's workshops turned AI from a buzzword into our competitive edge."</p>
+<strong>Diana Okafor</strong><br><span class="muted">VP Operations, Vertex Capital</span>
+</div>
+</div>
+</section>
+
+<section class="section container" id="newsletter" data-reveal>
+<div class="newsletter">
+<div class="label">STAY AHEAD</div>
+<h2>The AI Edge — weekly. Straight to your inbox.</h2>
+<p style="color:var(--muted);margin-bottom:25px;">Join 12,000+ leaders getting practical AI strategies, tools, and insights every Tuesday. No fluff, just signal.</p>
+
+<form>
+<input type="email" placeholder="Your email address">
+<button class="btn btn-gold">Subscribe</button>
+</form>
+
+<p style="font-size:12px;color:var(--muted);margin-top:15px;">No spam. Unsubscribe anytime.</p>
+</div>
+</section>
+
+<footer>
+<div class="container footer-inner">
+<div>
+<strong>PAUL BRIDGES</strong><br>
+<span>AI Strategy. Real Results.</span>
+</div>
+
+<div>
+<a href="#about">About</a> ·
+<a href="#services">Services</a> ·
+<a href="#testimonials">Testimonials</a> ·
+<a href="#newsletter">Newsletter</a>
+</div>
+
+<div>
+© 2026 Paul Bridges. All rights reserved.
+</div>
+</div>
+</footer>
+
+<script>
+window.addEventListener("scroll",()=>{
+document.getElementById("nav").classList.toggle("scrolled",window.scrollY>10)
+})
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+// hero-entrance: staggered fade-up of [data-hero] children on load
+(() => {
+  gsap.matchMedia().add({ reduce: "(prefers-reduced-motion: reduce)" }, (ctx) => {
+    const reduce = ctx.conditions.reduce;
+    const targets = gsap.utils.toArray("[data-hero] > *");
+    if (!targets.length) return;
+    gsap.from(targets, {
+      autoAlpha: 0,
+      y: reduce ? 0 : 30,
+      duration: reduce ? 0 : 0.8,
+      ease: "power3.out",
+      stagger: reduce ? 0 : 0.12,
+    });
+  });
+})();
+
+// scroll-reveal: fade/slide [data-reveal] elements in as they enter the viewport
+(() => {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.matchMedia().add({ reduce: "(prefers-reduced-motion: reduce)" }, (ctx) => {
+    const reduce = ctx.conditions.reduce;
+    const items = gsap.utils.toArray("[data-reveal]");
+    if (!items.length) return;
+    gsap.set(items, { autoAlpha: 0, y: reduce ? 0 : 40 });
+    ScrollTrigger.batch(items, {
+      start: "top 85%",
+      onEnter: (batch) =>
+        gsap.to(batch, {
+          autoAlpha: 1,
+          y: 0,
+          duration: reduce ? 0 : 0.7,
+          ease: "power2.out",
+          stagger: reduce ? 0 : 0.1,
+          overwrite: true,
+        }),
+    });
+  });
+})();
+
+// pinned-section: pin [data-pin] and reveal its children while pinned (desktop only)
+(() => {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.matchMedia().add(
+    {
+      isDesktop: "(min-width: 768px)",
+      reduce: "(prefers-reduced-motion: reduce)",
+    },
+    (ctx) => {
+      const { isDesktop, reduce } = ctx.conditions;
+      const section = document.querySelector("[data-pin]");
+      if (!section || !isDesktop || reduce) return; // skip pin on mobile / reduced motion
+      const items = section.querySelectorAll(":scope > *");
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "+=80%",
+            pin: true,
+            scrub: 1,
+          },
+        })
+        .from(items, { autoAlpha: 0, y: 50, stagger: 0.2, ease: "none" });
+    }
+  );
+})();
+
+// parallax: drift [data-parallax] layers slower than the page as it scrolls
+(() => {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.matchMedia().add({ reduce: "(prefers-reduced-motion: reduce)" }, (ctx) => {
+    if (ctx.conditions.reduce) return; // no parallax for reduced motion
+    gsap.utils.toArray("[data-parallax]").forEach((layer) => {
+      const depth = parseFloat(layer.getAttribute("data-parallax")) || 0.3;
+      gsap.to(layer, {
+        yPercent: -depth * 100,
+        ease: "none",
+        scrollTrigger: {
+          trigger: layer,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    });
+  });
+})();
+
+// counter: count [data-count] up to its target number when it scrolls into view
+(() => {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.matchMedia().add({ reduce: "(prefers-reduced-motion: reduce)" }, (ctx) => {
+    gsap.utils.toArray("[data-count]").forEach((el) => {
+      const target = parseFloat(el.getAttribute("data-count")) || 0;
+      if (ctx.conditions.reduce) { el.textContent = String(target); return; }
+      const obj = { v: 0 };
+      gsap.to(obj, {
+        v: target,
+        ease: "power1.out",
+        duration: 2,
+        scrollTrigger: { trigger: el, start: "top 85%", once: true },
+        onUpdate: () => { el.textContent = Math.round(obj.v).toLocaleString(); },
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
